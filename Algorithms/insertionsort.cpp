@@ -3,13 +3,17 @@ using namespace std;
 
 void insertionsort(int arr[], int length){
     for(int i = 1; i < length; i++){
-        int element = arr[i-1];
-        int secele = arr[i];
-        bool flag = true;
-
-        while(flag){
-            if(element > secele){
-                
+        int a = i;
+        int key = arr[a];
+        
+        while(a > 0){
+            if(arr[a] < arr[a-1]){
+                int temp = arr[a-1];
+                arr[a-1] = arr[a];
+                arr[a] = temp;
+                a--;
+            }else{
+                break;
             }
         }
     }
