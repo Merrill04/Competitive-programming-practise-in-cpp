@@ -10,15 +10,12 @@ int maxsum(vector<int>& arr, int n){
 
     while(i < n){
         if(arr[i] >= i+i+2){
+            sum += arr[i];
             i++;
         }else{
-            arr[i] = i+i+2;
+            sum += i+i+2;
             i++;
         }
-    }
-
-    for(int i = 0; i < n; i++){
-        sum += arr[i];
     }
     
     return sum; 
@@ -42,8 +39,8 @@ int main(){
         }
 
         int result = maxsum(v, n);
-
-        cout << result;
+        
+        cout << result << "\n";
     }
 
     return 0;
