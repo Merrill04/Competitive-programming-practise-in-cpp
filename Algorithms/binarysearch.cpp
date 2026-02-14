@@ -2,7 +2,7 @@
 #include<bits/stdc++.h>
 
 using namespace std;
-
+/*
 int search(vector<int> array, int n){
     int left = 0;
     int right = array.size()-1;
@@ -21,6 +21,22 @@ int search(vector<int> array, int n){
 
     return -1;
 }
+*/
+
+int recursivesearch(vector<int> array, int n, int left, int right){
+    int mid = left + (right-left)/2;
+    if(left > right){
+        return -1;
+    }
+
+    if(array[mid] == n){
+        return mid;
+    }else if(array[mid] > n){
+        return recursivesearch(array, n, left, mid-1);
+    }else{
+        return recursivesearch(array, n, mid+1, right);
+    }
+}
 
 int main(){
     int size;
@@ -36,7 +52,10 @@ int main(){
 
     cin >> x;
 
-    int result = search(arr, x);
+    int left = 0;
+    int right = arr.size()-1;
+
+    int result = recursivesearch(arr, x, left, right);
 
     if(result == -1){
         cout << "Element not found!";
