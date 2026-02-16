@@ -91,6 +91,7 @@ int countzeros(string nums, int start, int length, int count = 0){
     return countzeros(nums, start+1, length, count);
 }
 */
+
 int main(){
 //    int n;
 //    cin >> n;
@@ -112,12 +113,10 @@ int main(){
 //    cin >> n;
 //    cout << reversenum(n);
 
-    string num;
-    cin >> num;
-    int length = num.length() - 1;
+//    string num;
+//    cin >> num;
+//    int length = num.length() - 1;
 //    cout << palindromestr(num, 0, length);
 
 //    cout << countzeros(num, 0, length);
-
-    return 0;
 }

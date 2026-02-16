@@ -3,6 +3,19 @@
 
 using namespace std;
 
+int recursivesearch(vector<int> array, int x, int idx){
+    if(idx == array.size()){
+        return -1;
+    }
+
+    if(array[idx] == x){
+        return idx+1;
+    }
+
+    return recursivesearch(array, x, idx+1);
+}
+
+/* Using normal for loop.
 int search(vector<int> array, int n){
     int idx = -1;
 
@@ -14,6 +27,7 @@ int search(vector<int> array, int n){
 
     return idx;
 }
+*/
 
 int main(){
 
@@ -30,7 +44,7 @@ int main(){
 
     cin >> x;
 
-    int result = search(arr, x);
+    int result = recursivesearch(arr, x, 0);
 
     if(result == -1){
         cout << "Element not found!";
