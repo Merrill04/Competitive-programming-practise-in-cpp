@@ -6,7 +6,7 @@
 
    For the time complexity the array is divided in two parts until the element remaining in array is one. So each recursive call
    call divides array so for this it will be logn. Then while returning the array it needs to be sorted while returning. So hence
-   for each recursive call while returning the array is getting sorted with each call which requires two pointer approach the is 
+   for each recursive call while returning the array is getting sorted with each call which requires two pointer approach that is 
    time complexity of n. So hence overall time complexity is O(n logn).
    How logn is coming? At each level array is being divided by 2 raised to level times. 
    at level 1 the array is divided into 2 raised to 1. so 2 arrays are formed.
