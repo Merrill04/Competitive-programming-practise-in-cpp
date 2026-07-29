@@ -40,6 +40,46 @@ Node* createTree(Node* root){
     return root;
 }
 
+void createTreequeue(Node*& root){
+
+    cout << "Enter the data: ";
+    int data;
+    cin >> data;
+    root = new Node(data);
+
+    queue<Node*> q;
+
+    q.push(root);
+
+    while(!q.empty()){
+        Node* temp = q.front();
+        q.pop();
+
+        bool flag;
+        cout << "Do you want to enter data in left part of " << temp -> data << ": ";
+        cin >> flag;
+
+        if(flag == true){
+            cout << "Enter the data: ";
+            int data;
+            cin >> data;
+            temp->left = new Node(data);
+            q.push(temp -> left);
+        }
+
+        cout << "Do you want to enter data in right part of " << temp -> data << ": ";
+        cin >> flag;
+
+        if(flag == true){
+            cout << "Enter the data: ";
+            int data;
+            cin >> data;
+            temp->right = new Node(data);
+            q.push(temp -> right);
+        }
+    }
+}
+
 void Preorder(Node* root){//Print then go left and then go right
     if(root == NULL){
         return;
@@ -202,7 +242,7 @@ int levelofNode(Node* root, int data, int level){
 int main(){
     Node* root = NULL;
 
-    root = createTree(root);
+    createTreequeue(root);
 /*    
     Preorder(root);
     cout << "NULL" << "\n";
@@ -226,6 +266,7 @@ int main(){
 
     cout << heightoftree(root);
 */
-    cout << levelofNode(root, 5, 0);
+    Inorder(root);
+    cout << "NULL" << "\n";
     return 0;
 }
