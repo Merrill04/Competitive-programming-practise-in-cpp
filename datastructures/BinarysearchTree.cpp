@@ -57,18 +57,28 @@ Node* deletenode(Node* root, int val){
         root->right = deletenode(root->right, val);
         return root;
     }else{
-        if(root->left == NULL && root->right == NULL){
+        if(root->left == NULL && root->right == NULL){//the node to be deleted has 0  child than delete directly and return null
+            //so that the returned null value will get joined to the values above during return call.
             delete root;
             return NULL;
-        }else if(root->left == NULL && root->right != NULL){
+        }else if(root->left == NULL && root->right != NULL){//If the node to be deleted contains right part and left is null then
+            //store nodes right part in temp and delete the node and then return temp. while returning the temp will be joined to 
+            //the node above.
             Node* temp = root->right;
             delete root;
             return temp; 
-        }else if(root->right == NULL && root->left != NULL){
+        }else if(root->right == NULL && root->left != NULL){//similar as above like left present and right is null than do same
             Node* temp = root->left;
             delete root;
             return temp; 
-        }else{
+        }else{//If both the right and left parts are present than there are two options. Go to left of the node. Then go to
+            //extreme right of the left part using while loop. by doing this will get the maximum from left part and than  
+            //swap the values of the node to be deleted and the maximum node found in left part. after swapping we also need to 
+            // delete the node that we found. So again call delete function and pass root -> left, and the data with which we swapped.
+            //That node will contain zero child as it was at extreme right of left part and then get deleted using our first case.
+
+            //Option 2 is go to node -> right and the using while loop find the minimum from the right part and do as above. 
+            //The code below is following option 2 itself.
             Node* temp = root->right;
             while(temp->left != NULL){
                 temp = temp->left;
@@ -144,6 +154,28 @@ void levelorder(Node* root, vector<vector<int>>& v) {
     }
 }
 
+int minimuminBST(Node* root){
+    int min = root -> data;
+
+    while(root -> left != NULL){
+        min = root -> left -> data;
+        root = root -> left;
+    }
+
+    return min;
+}
+
+int maximuminBST(Node* root){
+    int max = root -> data;
+
+    while(root -> right != NULL){
+        max = root -> right -> data;
+        root = root -> right;
+    }
+
+    return max;
+}
+
 int main(){
     Node* root = NULL;
 
@@ -151,8 +183,15 @@ int main(){
 
     Inorder(root);
 
-    deletenode(root, 5);
+    //deletenode(root, 5);
     cout <<"\n";
 
-    Inorder(root);
+    int min = minimuminBST(root);
+    int max = maximuminBST(root);
+
+    cout << min << " " << max;
+
+    //Inorder(root);
+
+    return 0;
 }

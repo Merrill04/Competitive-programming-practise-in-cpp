@@ -14,6 +14,9 @@ Ways to create a thread in cpp:-
 (3) Functors
 (4) Member functions
 (5) Static member functions
+
+**A note to remember that when we create multiple threads in our program its not guaranteed which will start first. 
+
 */ 
 
 #include<bits/stdc++.h>
