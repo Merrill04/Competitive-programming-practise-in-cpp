@@ -7,10 +7,11 @@ class graph{
     public:
 
     unordered_map<int, vector<int>> adjecency_list;
+// Another way to do is create a vector<pair> v where pair is pair{int val, vector<int> list};
 
     void insertedge(int a, int b, bool direction){// This method does handles both the cases the directed and undirected graph.
         if(direction == false){//undirected so both the nodes will have interconnection.
-            adjecency_list[a].push_back(b);// Here we first push element in a as i exists.
+            adjecency_list[a].push_back(b);// Here we first push element in a as it exists.
             if(adjecency_list.find(b) == adjecency_list.end()){// Here we check if key b is present. If its not present then it
                                                                // returns ul.end(). If its ul.end() then we create a vector and push with key as b.
                 vector<int> v;                    
@@ -79,6 +80,45 @@ class graph{
             cout << endl;
         }
     }
+
+    void bfs(vector<int>& res){//At each node from start add the node in res, then add its neighbouring nodes in queue and mark
+        //Them visited. If they are visited then do not add in queue next time else add in queue. This will give bfs traversal.
+        //BFS traversal is nothing but from start just go on adding in result. Like if 0 is joining to 1 and 2 and 1 joins to 3
+        //and 2 joins to 4 then first add 0 then add its both neighbours 1 and 2 and then neighbours of 1 and then neighbours of 2.
+        vector<bool> check(nodes, false);
+        queue<int> q;
+
+        q.push(0);
+        check[0] = true;
+        while(!q.empty()){
+            int temp = q.front();
+            q.pop();
+
+            res.push_back(temp);
+
+            for(int i = 0; i < nodes; i++){
+                if(matrix[temp][i] != 0 && check[i] == false){
+                    q.push(i);
+                    check[i] = true;
+                }
+            }
+        }
+    }
+
+    void dfs(int start, vector<int>& res, vector<bool>& isvisited){
+        if(isvisited[start] == true){
+            return;
+        }
+
+        res.push_back(start);
+        isvisited[start] = true;
+
+        for(int i = 0; i < matrix[start].size(); i++){
+            if(matrix[start][i] != 0 && isvisited[i] == false){
+                dfs(i, res, isvisited);
+            }
+        }
+    }
 };
 
 int main(){
@@ -94,6 +134,27 @@ int main(){
     g.insertedge(4, 4, true);
 
     g.print();
+    cout << "\n";
+
+    vector<int> bfsres;
+
+    g.bfs(bfsres);
+
+    for(int i = 0; i < bfsres.size(); i++){
+        cout << bfsres[i] << " ";
+    }
+    
+    cout << "\n";
+
+    vector<int> dfsres;
+    vector<bool> visited(5 ,false);
+    int start = 0;
+
+    g.dfs(start, dfsres, visited);
+
+    for(int i = 0; i < dfsres.size(); i++){
+        cout << dfsres[i] << " ";
+    }
 
     return 0;
 }
